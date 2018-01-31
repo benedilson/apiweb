@@ -1,0 +1,27 @@
+<div data-ng-controller="clienteController">
+	oi {{cliente.nome}}
+	<form novalidate name="frmCliente">
+		<div>
+			<label>Nome: </label>
+			<input type="text" name="txtNome" data-ng-model="cliente.nome" required />
+			<span data-ng-show="frmCliente.txtNome.$error.required && frmCliente.txtNome.$dirty ">Campo Nome Obrigatorio!</span>
+		</div>
+		
+		<div>
+			<label>E-mail: </label>
+			<input type="email" name="txtEmail" data-ng-model="cliente.email" required />
+			<span data-ng-show="frmCliente.txtEmail.$error.required && frmCliente.txtEmail.$dirty ">Campo E-mail Obrigatorio!</span>
+			<span data-ng-show="frmCliente.txtEmail.$error.email">Campo E-mail Invalido!</span>
+		</div>
+		
+		<input type="button" value="Salvar" data-ng-click="salvarCliente()" data-ng-disabled="frmCliente.$invalid" />
+		<input type="button" value="Cancelar" data-ng-click="cancelarAlteracaoCliente()" data-ng-disabled="frmCliente.$invalid" />
+	</form>
+
+	<div data-ng-repeat="cli in clientes">
+		{{cli.id + ' | ' + cli.nome}} <input type="button" value="Deletar"
+			data-ng-click="excluirCliente(cli)" /> <input type="button"
+			value="Alterar" data-ng-click="alterarCliente(cli)" /> <a
+			href="clientes/{{cli.id}}">Detalhe</a>
+	</div>
+</div>
